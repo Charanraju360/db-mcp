@@ -2,13 +2,9 @@ import sqlite3
 import psycopg2
 import pymysql
 
-# this function takes db type and credentials
-# and returns a connection object
-
 def make_connection(db_type, host, port, user, password, database):
 
     if db_type == "sqlite":
-        # sqlite only needs a file path, no host or user needed
         conn = sqlite3.connect(database)
         return conn
 

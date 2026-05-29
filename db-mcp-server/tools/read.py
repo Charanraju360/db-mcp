@@ -33,7 +33,6 @@ def list_databases(token):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-
 # list all tables in current database
 def list_tables(token):
     conn, err = get_conn(token)
