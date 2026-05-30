@@ -3,6 +3,7 @@ from mcp.server.fastmcp import FastMCP
 from tools.auth import connect_db, disconnect_db
 from tools.read import list_databases, list_tables, describe_table, get_db_info, execute_query
 from tools.write import preview_query, confirm_execute, cancel_query
+from tools.chart import visualize_table
 
 mcp = FastMCP("db-mcp-server")
 
@@ -51,6 +52,8 @@ def tool_execute_query(token: str, query: str) -> dict:
     """run a SELECT query and get results. only read only queries allowed here"""
     return execute_query(token, query)
 
+# --- write tools ---
+
 @mcp.tool()
 def tool_preview_query(token: str, query: str) -> dict:
     """preview a write query (INSERT, UPDATE, DELETE etc) before running it. returns a confirmation_id. user must approve before it runs"""
@@ -67,6 +70,13 @@ def tool_confirm_execute(confirmation_id: str) -> dict:
 def tool_cancel_query(confirmation_id: str) -> dict:
     """user rejected the query. cancel it using the confirmation_id from preview_query"""
     return cancel_query(confirmation_id)
+
+# --- chart tool ---
+
+@mcp.tool()
+def tool_visualize_table(token: str, query: str, title: str = "Chart") -> dict:
+    """run a SELECT query and visualize the result as a chart. opens in browser automatically"""
+    return visualize_table(token, query, title)
 
 # --- main entry point ---
 
