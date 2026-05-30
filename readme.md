@@ -37,7 +37,7 @@ requirements.txt
 
 **1. Clone and create virtual environment**
 ```bash
-git clone <your-repo>
+git clone https://github.com/Charanraju360/db-mcp.git
 cd db-mcp
 python -m venv .venv
 
